@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Air Merembes</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+        <style>
+            .jersey-10-regular {
+                font-family: "Jersey 10", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+            }
+        </style>
+    </head>
+
+    <body class="bg-slate-100">
+
+        <div class="px-32 mb-32">
+            <div class="mx-auto py-5">
+                <div class="max-w-2xl mx-auto mb-5">
+                    <div class="text-center">
+                        <h3 class="text-5xl font-bold tracking-tight text-gray-700 jersey-10-regular tracking-wide">Me'rembes</h3>
+                        <p class="leading-7 text-gray-500">Bocor? pake noh drop, No bocor bocor!</p>
+                    </div>
+                </div>
+
+                <form action="#" method="post" enctype="multipart/form-data" class="p-7 bg-white border border-gray-900/25 rounded-md">
+                    <div class="grid grid-cols-2 gap-4 mb-3">
+                        <input type="text"
+                            name="name"
+                            id="name"
+                            class="w-full px-3 py-2 rounded-md bg-slate-100 border text-gray-700 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                            placeholder="Name" 
+                            oninput="setInput(this.name, this.value)">
+                        <input type="text"
+                            name="project_name"
+                            id="project-name"
+                            class="w-full px-3 py-2 rounded-md border bg-slate-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                            placeholder="Project Name"
+                            oninput="setInput(this.name, this.value)">
+                        <input type="text"
+                            name="dept"
+                            id="dept"
+                            class="w-full px-3 py-2 rounded-md border bg-slate-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                            placeholder="Dept"
+                            oninput="setInput(this.name, this.value)">
+                        <input type="text"
+                            name="client"
+                            id="client"
+                            class="w-full px-3 py-2 rounded-md border bg-slate-100 text-gray-700 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                            placeholder="Client"
+                            oninput="setInput(this.name, this.value)">
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button 
+                            type="button"
+                            id="addRow"
+                            class="rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            Add Row
+                        </button>
+                    </div>
+    
+                    <table class="w-full text-sm text-left text-surface dark:text-white border-separate border-spacing-y-3" id="tableRembes">
+                        <thead>
+                            <tr class="bg-slate-500 text-white shadow-md">
+                                <th scope="col" class="px-4 py-4 rounded-l-md text-center" width="5%">No</th>
+                                <th scope="col" class="px-4 py-4">Date</th>
+                                <th scope="col" class="px-4 py-4">Description of Expenses</th>
+                                <th scope="col" class="px-4 py-4">Amount</th>
+                                <th scope="col" class="px-4 py-4">Attachment</th>
+                                <th scope="col" class="px-4 py-4 rounded-r-md"></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+    
+                    <div class="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-2 my-10">
+                        <div class="col-span">
+                            <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-500">Signature</label>
+                            <div class="mt-2 flex justify-center rounded-lg bg-slate-100 border border-dashed border-gray-900/25 px-6 py-10">
+                                <div class="text-center">
+                                    <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <img src="#" class="mx-auto w-20 border-2 rounded cursor-pointer" id="signatureThumb" style="display: none;">
+                                    <div class="mt-4 flex text-sm leading-6 text-gray-700 justify-center">
+                                        <label for="signature" class="relative cursor-pointer font-semibold text-slate-500">
+                                            <span>Upload a file</span>
+                                            <input id="signature" name="signature" type="file" class="sr-only" onchange="setSignature(event)">
+                                        </label>
+                                    </div>
+                                    <p class="text-xs leading-5 text-gray-600">PNG or JPG under 1MB</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-span">
+                            <label for="notes" class="block text-sm font-medium leading-6 text-gray-500">Notes</label>
+                            <div class="mt-2">
+                                <input
+                                    type="text"
+                                    name="notes" 
+                                    id="notes"
+                                    class="block w-full rounded-md border bg-slate-100 px-3 py-2 text-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                                    oninput="setInput(this.name, this.value)"></input>
+                            </div>
+                            <br>
+                            <label for="about" class="block text-sm font-medium leading-6 text-gray-500">Date Submission</label>
+                            <input 
+                                type="date"
+                                name="date_submission"
+                                id="date-submission"
+                                class="w-full mt-2 px-3 py-2 border bg-slate-100 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                                onchange="setInput(this.name, this.value)">
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center gap-4">
+                        <button type="button" id="save" class="rounded-md px-7 py-2.5 text-sm font-semibold text-gray-500 border shadow-md hover:bg-slate-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Simpan dulu</button>
+                        <a 
+                            href="print.html"
+                            id="print"
+                            target="_blank"
+                            class="rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            Print
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="modal-image-preview" style="display: none;">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+            <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="relative transform overflow-hidden">
+                    <img src="#" id="image-preview" width="300px">
+                </div>
+                </div>
+            </div>
+        </div>
+          
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            let data = {
+                name: '',
+                dept: '',
+                project_name: '',
+                client: '',
+                expanses: [],
+                notes: '',
+                signature: '',
+            };
+
+            $(document).ready(function() {
+                setAn();
+                addRow();
+                setDate();
+            })
+
+            $('#addRow').click(function() {
+                addRow();
+            });
+
+            $('#tableRembes').on('click', '.remove-row', function() {
+                let countTr = $('#tableRembes tbody tr').length;
+                if (countTr > 1) {
+                    let row = $(this).closest('tr');
+                    let rowIndex = row.find('input[name="index_row"]').val();
+
+                    data.expanses.splice(rowIndex, 1);
+                    row.remove();
+
+                    $('#tableRembes tbody tr').each(function(index) {
+                        let rowNumber = index + 1;
+                        $(this).find('.increment-number').text(rowNumber);
+                        $(this).find('input[name="index_row"]').val(rowNumber);
+                    });
+                }
+            });
+
+            $('#tableRembes').on('click', '.image-thumb', function() {
+                let src = $(this).attr('src');
+                $('#image-preview').attr('src', src);
+                $('#modal-image-preview').show();
+            })
+
+            $('#modal-image-preview').on('click', function() {
+                $('#image-preview').attr('src', '#');
+                $(this).hide();
+            })
+
+            $('#signatureThumb').on('click', function() {
+                let src = $(this).attr('src');
+                $('#image-preview').attr('src', src);
+                $('#modal-image-preview').show();
+            })
+
+            $('#print').on('click', function() {
+                setDataToLocal();
+            })
+
+            $('#save').on('click', function() {
+                setDataToLocal();
+            })
+
+            function setAn() {
+                let n = $('#name');
+                let d = $('#dept');
+                let pn = $('#project-name');
+                let c = $('#client');
+                if (data.name != '') n.val(data.name);
+                if (data.dept != '') d.val(data.dept);
+                if (data.dept != '') pn.val(data.project_name);
+                if (data.dept != '') c.val(data.client);
+            }
+
+            function setDate() {
+                const dateInput = $('#date-submission');
+                const today = new Date();                
+                const formattedDate = today.toISOString().split('T')[0];
+                dateInput.val(formattedDate);
+            }
+
+            function addRow() {
+                let rowCount = $('#tableRembes tbody tr').length + 1;
+                let tr = `
+                    <tr class="bg-white shadow-md">
+                        <td class="px-4 py-2 rounded-l-md font-medium text-center text-gray-500 increment-number">${rowCount}</td>
+                        <td class="px-4 py-2">
+                            <input
+                                type="date"
+                                name="date"
+                                class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                                onchange="setExpanse(this, event)">
+                        </td>
+                        <td class="px-4 py-2">
+                            <input
+                                type="text"
+                                name="description"
+                                class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                                placeholder="Ngapain?"
+                                oninput="setExpanse(this, event)">
+                        </td>
+                        <td class="px-4 py-2">
+                            <input
+                                type="number"
+                                name="amount"
+                                class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500"
+                                placeholder="Habis berapa?"
+                                oninput="setExpanse(this, event)">
+                        </td>
+                        <td class="px-4 py-2">
+                            <div class="flex gap-4">
+                                <input
+                                    type="file"
+                                    name="attachment"
+                                    class="w-full px-3 py-2 border rounded-md text-gray-700 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-500 self-center"
+                                    onchange="setExpanse(this, event)">
+                                <img src="#" class="image-thumb border-2 rounded" alt="Image Preview" style="display:none; width: 70px; height: 43px; object-fit: cover; cursor: pointer;" />
+                            </div>
+                        </td>
+                        <td class="px-4 py-2 rounded-r-md text-center">
+                            <span class="text-xl text-gray-500 font-bold cursor-pointer remove-row">&times;</span>
+                            <input type="hidden" name="index_row" value="${rowCount}">
+                        </td>
+                    </tr>
+                `;
+
+                $('#tableRembes tbody').append(tr);
+            }
+
+            function setInput(key, value) {
+                data[key] = value;
+            }
+
+            function setExpanse(el, ev) {
+                let index = $(el).closest('tr').find('input[name="index_row"]').val();
+                let key = el.name;
+                let value = el.value;
+
+                if (!data.expanses[index]) data.expanses[index] = {};
+
+                if (ev.target.type === 'file') {
+                    let file = ev.target.files[0];
+                    if (file) {
+                        let reader = new FileReader();
+                        reader.onload = (e) => {
+                            let imageURL = e.target.result;
+                            $(el).next().attr('src', imageURL).show();
+                            data.expanses[index][key] = imageURL;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                } else {
+                    data.expanses[index][key] = value;
+                }
+            }
+
+            function setSignature(ev) {
+                let file = ev.target.files[0];
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    let imageURL = e.target.result;
+                    data['signature'] = imageURL;
+                    $('#signatureThumb')
+                        .attr('src', imageURL)
+                        .show()
+                        .prev('svg')
+                        .hide();
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function setDataToLocal() {
+                let convertData = JSON.stringify(data);
+                localStorage.setItem('data', convertData);
+            }
+        </script>
+    </body>
+
+</html>
