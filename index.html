@@ -20,7 +20,7 @@
 
     <body class="bg-slate-100">
 
-        <div class="px-32 mb-32">
+        <div class="px-32 mb-32 min-[320px]:px-3 md:px-32">
             <div class="mx-auto py-5">
                 <div class="max-w-2xl mx-auto mb-5">
                     <div class="text-center">
@@ -29,8 +29,8 @@
                     </div>
                 </div>
 
-                <form action="#" method="post" enctype="multipart/form-data" class="p-7 bg-white border border-gray-900/25 rounded-md">
-                    <div class="grid grid-cols-2 gap-4 mb-3">
+                <form action="#" method="post" enctype="multipart/form-data" class="p-7 min-[320px]:p-0 md:p-7 bg-white border border-gray-900/25 rounded-md">
+                    <div class="grid grid-cols-2 gap-4 mb-3 min-[320px]:grid-cols-1 min-[320px]:px-7 min-[320px]:pt-7 md:grid-cols-2 md:p-0">
                         <input type="text"
                             name="name"
                             id="name"
@@ -57,30 +57,43 @@
                             oninput="setInput(this.name, this.value)">
                     </div>
 
-                    <div class="flex justify-end">
+                    <!-- Desktop -->
+                    <div class="min-[320px]:hidden md:block">
+                        <div class="flex justify-end">
+                            <button 
+                                type="button"
+                                id="addRow"
+                                class="rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                Add Row
+                            </button>
+                        </div>
+        
+                        <table class="w-full text-sm text-left text-surface dark:text-white border-separate border-spacing-y-3" id="tableRembes">
+                            <thead>
+                                <tr class="bg-slate-500 text-white shadow-md">
+                                    <th scope="col" class="px-4 py-4 rounded-l-md text-center" width="5%">No</th>
+                                    <th scope="col" class="px-4 py-4">Date</th>
+                                    <th scope="col" class="px-4 py-4">Description of Expenses</th>
+                                    <th scope="col" class="px-4 py-4">Amount</th>
+                                    <th scope="col" class="px-4 py-4">Attachment</th>
+                                    <th scope="col" class="px-4 py-4 rounded-r-md"></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Mobile -->
+                    <div class="flex flex-col min-[320px]:flex md:hidden" id="mobile">
                         <button 
                             type="button"
-                            id="addRow"
-                            class="rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            id="addRowMobile"
+                            class="mx-7 mb-4 mt-7 rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-100">
                             Add Row
                         </button>
                     </div>
     
-                    <table class="w-full text-sm text-left text-surface dark:text-white border-separate border-spacing-y-3" id="tableRembes">
-                        <thead>
-                            <tr class="bg-slate-500 text-white shadow-md">
-                                <th scope="col" class="px-4 py-4 rounded-l-md text-center" width="5%">No</th>
-                                <th scope="col" class="px-4 py-4">Date</th>
-                                <th scope="col" class="px-4 py-4">Description of Expenses</th>
-                                <th scope="col" class="px-4 py-4">Amount</th>
-                                <th scope="col" class="px-4 py-4">Attachment</th>
-                                <th scope="col" class="px-4 py-4 rounded-r-md"></th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-    
-                    <div class="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-2 my-10">
+                    <div class="grid grid-cols-2 gap-x-6 gap-y-6 min-[320px]:grid-cols-1 min-[320px]:px-7 md:grid-cols-2 my-10 md:p-0">
                         <div class="col-span">
                             <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-500">Signature</label>
                             <div class="mt-2 flex justify-center rounded-lg bg-slate-100 border border-dashed border-gray-900/25 px-6 py-10">
@@ -126,7 +139,7 @@
                             href="print.html"
                             id="print"
                             target="_blank"
-                            class="rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            class="min-[320px]:w-full min-[320px]:mx-7 min-[320px]:mb-7 md:w-max md:m-0 text-center rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                             Print
                         </a>
                     </div>
@@ -137,7 +150,7 @@
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="modal-image-preview" style="display: none;">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
             <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-                <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
                 <div class="relative transform overflow-hidden">
                     <img src="#" id="image-preview" width="300px">
                 </div>
@@ -159,12 +172,20 @@
 
             $(document).ready(function() {
                 setAn();
-                addRow();
                 setDate();
+
+                if ($('#mobile').is(':visible'))
+                    addRowOnMobile();
+                else
+                    addRow();
             })
 
             $('#addRow').click(function() {
                 addRow();
+            });
+
+            $('#addRowMobile').click(function() {
+                addRowOnMobile();
             });
 
             $('#tableRembes').on('click', '.remove-row', function() {
@@ -184,7 +205,24 @@
                 }
             });
 
-            $('#tableRembes').on('click', '.image-thumb', function() {
+            $('#mobile').on('click', '.remove-row-mobile', function() {
+                let countTr = $('.mobile-form').length;
+                if (countTr > 1) {
+                    let row = $(this).closest('.mobile-form');
+                    let rowIndex = row.find('input[name="index_row_mobile"]').val();
+
+                    data.expanses.splice(rowIndex, 1);
+                    row.remove();
+
+                    $('.mobile-form').each(function(index) {
+                        let rowNumber = index + 1;
+                        $(this).find('.increment-number-mobile').text(rowNumber);
+                        $(this).find('input[name="index_row_mobile"]').val(rowNumber);
+                    });
+                }
+            });
+
+            $('#tableRembes, #mobile').on('click', '.image-thumb', function() {
                 let src = $(this).attr('src');
                 $('#image-preview').attr('src', src);
                 $('#modal-image-preview').show();
@@ -222,7 +260,7 @@
 
             function setDate() {
                 const dateInput = $('#date-submission');
-                const today = new Date();                
+                const today = new Date(); 
                 const formattedDate = today.toISOString().split('T')[0];
                 dateInput.val(formattedDate);
             }
@@ -275,12 +313,65 @@
                 $('#tableRembes tbody').append(tr);
             }
 
+            function addRowOnMobile() {
+                let elCount = $('.mobile-form').length + 1;
+                
+                let el = `
+                    <div class="p-2 border-t border-gray-900/25 min-[320px]:px-7 bg-slate-100 mobile-form">
+                        <div class="grid grid-cols gap-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500 font-bold">No : <span class="increment-number-mobile">${elCount}</span></span>
+                                <button 
+                                    type="button" 
+                                    class="rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 remove-row-mobile">
+                                    Hapus
+                                </button>
+                                <input type="hidden" name="index_row_mobile" value="${elCount}">
+                            </div>
+                            <input
+                                type="date"
+                                name="date"
+                                class="w-full px-3 py-2 border rounded-md text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500"
+                                onchange="setExpanse(this, event)">
+                            <input
+                                type="text"
+                                name="description"
+                                class="w-full px-3 py-2 border rounded-md text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500"
+                                placeholder="Ngapain?"
+                                oninput="setExpanse(this, event)">
+                            <input
+                                type="number"
+                                name="amount"
+                                class="w-full px-3 py-2 border rounded-md text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500"
+                                placeholder="Habis berapa?"
+                                oninput="setExpanse(this, event)">
+                            <div class="flex gap-4">
+                                <input
+                                    type="file"
+                                    name="attachment"
+                                    class="w-full px-3 py-2 border rounded-md text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500 self-center"
+                                    onchange="setExpanse(this, event)">
+                                <img src="#" class="image-thumb border-2 rounded" alt="Image Preview" style="display:none; width: 70px; height: 43px; object-fit: cover; cursor: pointer;" />
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $('#mobile').append(el);
+            }
+
             function setInput(key, value) {
                 data[key] = value;
             }
 
             function setExpanse(el, ev) {
-                let index = $(el).closest('tr').find('input[name="index_row"]').val();
+                let index = 0;
+                if ($('#mobile').is(':visible')) {
+                    index = $(el).closest('.mobile-form').find('input[name="index_row_mobile"]').val();
+                } else {
+                    index = $(el).closest('tr').find('input[name="index_row"]').val();
+                }
+
                 let key = el.name;
                 let value = el.value;
 
