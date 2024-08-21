@@ -84,11 +84,11 @@
                     </div>
                     
                     <!-- Mobile -->
-                    <div class="flex flex-col min-[320px]:flex md:hidden" id="mobile">
+                    <div class="flex flex-col mt-7 min-[320px]:flex md:hidden" id="mobile">
                         <button 
                             type="button"
                             id="addRowMobile"
-                            class="mx-7 mb-4 mt-7 rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-100">
+                            class="mx-7 my-4 rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-100">
                             Add Row
                         </button>
                     </div>
@@ -135,13 +135,13 @@
                     </div>
 
                     <div class="flex justify-center gap-4">
-                        <a 
-                            href="print.html"
+                        <button type="button" id="save" class="min-[320px]:w-full min-[320px]:ml-7 min-[320px]:mb-7 md:w-max md:m-0 text-center rounded-md bg-white px-7 py-2.5 text-sm font-semibold text-gray-500 shadow-md hover:bg-slate-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Simpan dulu</button>
+                        <button 
+                            type="button"
                             id="print"
-                            target="_blank"
-                            class="min-[320px]:w-full min-[320px]:mx-7 min-[320px]:mb-7 md:w-max md:m-0 text-center rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            class="min-[320px]:w-full min-[320px]:mr-7 min-[320px]:mb-7 md:w-max md:m-0 text-center rounded-md bg-slate-700 px-7 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                             Print
-                        </a>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -178,6 +178,8 @@
                     addRowOnMobile();
                 else
                     addRow();
+
+                $('#date-submission').trigger('change');
             })
 
             $('#addRow').click(function() {
@@ -240,7 +242,11 @@
             })
 
             $('#print').on('click', function() {
-                setDataToLocal();
+                let dataLocal = JSON.parse(localStorage.getItem('data'));
+                if (!dataLocal) return alert('Datanya masih kosong!');
+                if (dataLocal.expanses.length == 0) return alert('Simpan dulu baru print!');
+
+                window.open('print.html');
             })
 
             $('#save').on('click', function() {
@@ -252,10 +258,13 @@
                 let d = $('#dept');
                 let pn = $('#project-name');
                 let c = $('#client');
-                if (data.name != '') n.val(data.name);
-                if (data.dept != '') d.val(data.dept);
-                if (data.dept != '') pn.val(data.project_name);
-                if (data.dept != '') c.val(data.client);
+
+                let dataLocal = JSON.parse(localStorage.getItem('data'));
+
+                if (dataLocal.name != '') n.val(dataLocal.name);
+                if (dataLocal.dept != '') d.val(dataLocal.dept);
+                if (dataLocal.dept != '') pn.val(dataLocal.project_name);
+                if (dataLocal.dept != '') c.val(dataLocal.client);
             }
 
             function setDate() {
@@ -318,7 +327,7 @@
                 
                 let el = `
                     <div class="p-2 border-t border-gray-900/25 min-[320px]:px-7 bg-slate-100 mobile-form">
-                        <div class="grid grid-cols gap-4">
+                        <div class="grid grid-cols gap-4 my-5">
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-500 font-bold">No : <span class="increment-number-mobile">${elCount}</span></span>
                                 <button 
@@ -357,7 +366,7 @@
                     </div>
                 `;
 
-                $('#mobile').append(el);
+                $('#mobile').prepend(el);
             }
 
             function setInput(key, value) {
@@ -365,12 +374,9 @@
             }
 
             function setExpanse(el, ev) {
-                let index = 0;
-                if ($('#mobile').is(':visible')) {
-                    index = $(el).closest('.mobile-form').find('input[name="index_row_mobile"]').val();
-                } else {
-                    index = $(el).closest('tr').find('input[name="index_row"]').val();
-                }
+                let index = ($('#mobile').is(':visible'))
+                            ? $(el).closest('.mobile-form').find('input[name="index_row_mobile"]').val()
+                            : $(el).closest('tr').find('input[name="index_row"]').val();
 
                 let key = el.name;
                 let value = el.value;

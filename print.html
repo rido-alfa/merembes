@@ -257,19 +257,23 @@
             }
 
             function formatDate(dateString) {
-                const dateParts = dateString.split('-');
-                const year = dateParts[0].slice(-2);
-                const month = dateParts[1];
-                const day = dateParts[2];
-                return `${day}/${month}/${year}`;
+                if (dateString) {
+                    const dateParts = dateString.split('-');
+                    const year = dateParts[0].slice(-2);
+                    const month = dateParts[1];
+                    const day = dateParts[2];
+                    return `${day}/${month}/${year}`;
+                }
             }
 
             function formatRupiah(amount) {
-                return new Intl.NumberFormat('id-ID', {
-                    style: 'currency',
-                    currency: 'IDR',
-                    minimumFractionDigits: 0
-                }).format(amount).replace('Rp', 'Rp. ');
+                if (amount) {
+                    return new Intl.NumberFormat('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR',
+                        minimumFractionDigits: 0
+                    }).format(amount).replace('Rp', 'Rp. ');
+                }
             }
             
             function setDocYearNumber() {
